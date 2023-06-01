@@ -6,6 +6,24 @@ import Tab from "react-bootstrap/Tab";
 import Area from "./Area";
 
 const ViewParking = (props) => {
+    let area1 = [
+        [1, 1, 1, 1],
+        [1, 1, 1, 1],
+        [1, 1, 1, 1],
+        [1, 1, 1, 1],
+      ];
+    let area2 = [
+        [1, 1, 1, 1],
+        [0, 0, 1, 1],
+        [1, 1, 0, 0],
+        [0, 0, 1, 1],
+      ];
+    let area3 = [
+        [1, 1, 1, 1],
+        [0, 0, 0, 1],
+        [0, 0, 0, 1],
+        [1, 0, 0, 1],
+      ];
   return (
     <Tab.Container defaultActiveKey="first">
       <Row>
@@ -46,10 +64,14 @@ const ViewParking = (props) => {
         <Col sm={9}>
           <Tab.Content>
             <Tab.Pane eventKey="first">
-                <Area/>
+                <Area arr={area1}/>
             </Tab.Pane>
-            <Tab.Pane eventKey="second">Second tab content</Tab.Pane>
-            <Tab.Pane eventKey="third">third tab content</Tab.Pane>
+            <Tab.Pane eventKey="second">
+                <Area arr={area2}/>
+            </Tab.Pane>
+            <Tab.Pane eventKey="third">
+                <Area arr={area3}/>
+            </Tab.Pane>
           </Tab.Content>
         </Col>
       </Row>

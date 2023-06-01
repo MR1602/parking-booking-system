@@ -4,6 +4,8 @@ import Nav from "react-bootstrap/Nav";
 import Row from "react-bootstrap/Row";
 import Tab from "react-bootstrap/Tab";
 import ViewParking from "./ViewParking";
+import BookParking from "./BookParking";
+import ViewBookings from "./ViewBookings";
 
 const Tabs = () => {
   return (
@@ -29,8 +31,12 @@ const Tabs = () => {
             <Tab.Pane eventKey="first">
               <ViewParking />
             </Tab.Pane>
-            <Tab.Pane eventKey="second">Second tab content</Tab.Pane>
-            <Tab.Pane eventKey="third">third tab content</Tab.Pane>
+            <Tab.Pane eventKey="second">
+              <BookParking />
+            </Tab.Pane>
+            <Tab.Pane eventKey="third">
+              <ViewBookings />
+            </Tab.Pane>
           </Tab.Content>
         </Col>
       </Row>
