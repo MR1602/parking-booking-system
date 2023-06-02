@@ -64,13 +64,13 @@ const ViewParking = (props) => {
         <Col sm={9}>
           <Tab.Content>
             <Tab.Pane eventKey="first">
-                <Area arr={area1}/>
+                <Area arr={area1} area="Area 1" />
             </Tab.Pane>
             <Tab.Pane eventKey="second">
-                <Area arr={area2}/>
+                <Area arr={area2} area="Area 2" />
             </Tab.Pane>
             <Tab.Pane eventKey="third">
-                <Area arr={area3}/>
+                <Area arr={area3} area="Area 3" />
             </Tab.Pane>
           </Tab.Content>
         </Col>

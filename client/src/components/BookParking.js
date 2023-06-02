@@ -1,10 +1,16 @@
 import React, { useState } from "react";
+import { useSelector, useDispatch } from 'react-redux';
+import { postBooking } from '../actions/bookingActions';
 
 const BookParking = () => {
   const [area, setArea] = useState("");
   const [spot, setSpot] = useState("");
   const [timeFrom, setTimeFrom] = useState("");
   const [timeTo, setTimeTo] = useState("");
+
+  const { bookings, loading, error } = useSelector((state) => state.booking);
+
+  const dispatch = useDispatch();
 
   const handleAreaChange = (e) => {
     setArea(e.target.value);
@@ -25,12 +31,18 @@ const BookParking = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     // Perform login logic here
-    console.log("Area:", area);
-    console.log("Spot:", spot);
+    const bookingData = {
+      area,
+      spot,
+      start: timeFrom,
+      end: timeTo
+    }
+    dispatch(postBooking(bookingData));
   };
 
   return (
     <form onSubmit={handleSubmit}>
+      {error && <p>Error: {error}</p>}
       <div className="row w-75 m-auto">
         <div className="mb-3 col">
           <input
@@ -76,7 +88,7 @@ const BookParking = () => {
           />
         </div>
       </div>
-      <button type="submit" className="btn border w-25 m-auto" style={{
+      <button type="submit" className="btn btn-primary border w-25 m-auto" disabled={loading} style={{
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center'

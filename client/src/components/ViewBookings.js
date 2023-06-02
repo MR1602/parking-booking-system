@@ -1,53 +1,49 @@
-import React from 'react'
+import React, { useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { fetchBookings } from "../actions/bookingActions";
 
 const ViewBookings = () => {
+  const { bookings, loading, error } = useSelector((state) => state.booking);
 
-    const data = [
-        {
-          area: 'Area 1',
-          spot: 'Spot 1',
-          date: '2023-05-31',
-          start: '09:00',
-          end: '10:30',
-          duration: '1h',
-        },
-        {
-          area: 'Area 2',
-          spot: 'Spot 2',
-          date: '2023-06-01',
-          start: '02:00',
-          end: '04:00',
-          duration: '2h',
-        },
-        // Add more data as needed
-      ];
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(fetchBookings());
+  }, []);
 
   return (
-    <table className="table table-striped">
-      <thead>
-        <tr>
-          <th>Area</th>
-          <th>Spot</th>
-          <th>Date</th>
-          <th>Start</th>
-          <th>End</th>
-          <th>Duration</th>
-        </tr>
-      </thead>
-      <tbody>
-        {data.map((item, index) => (
-          <tr key={index}>
-            <td>{item.area}</td>
-            <td>{item.spot}</td>
-            <td>{item.date}</td>
-            <td>{item.start}</td>
-            <td>{item.end}</td>
-            <td>{item.duration}</td>
-          </tr>
-        ))}
-      </tbody>
-    </table>
-  )
-}
+    <div>
+      {error && <p>Error: {error}</p>}
+      {loading ? (
+        <p>Loading...</p>
+      ) : (
+        <table className="table table-striped">
+          <thead>
+            <tr>
+              <th>Area</th>
+              <th>Spot</th>
+              <th>Date</th>
+              <th>Start</th>
+              <th>End</th>
+              <th>Duration</th>
+            </tr>
+          </thead>
+          <tbody>
+            {bookings.map((item, index) => (
+              <tr key={index}>
+                <td>{item.area}</td>
+                <td>{item.spot}</td>
+                <td>{new Date(item.date).toLocaleDateString("en-UK")}</td>
+                <td>{item.start}</td>
+                <td>{item.end}</td>
+                <td>{item.duration.toString().replace("00", "h")}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      )}
+    </div>
+  );
+};
 
-export default ViewBookings
+export default ViewBookings;
